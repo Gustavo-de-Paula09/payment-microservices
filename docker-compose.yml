@@ -1,0 +1,24 @@
+services:
+  dbpostgres:
+    image: postgres
+    container_name: dbpostgres
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=microservices
+      - TZ=GMT
+    volumes:
+      - "./dbpostgres-data:/var/lib/postgresql/data"
+
+  rabbitmq:
+    image: rabbitmq:4.0-management
+    container_name: rabbitmq
+    restart: unless-stopped
+    ports:
+      - 15672:15672
+      - 5672:5672
+    volumes:
+      - "./rabbitmq-data:/var/lib/rabbitmq"
